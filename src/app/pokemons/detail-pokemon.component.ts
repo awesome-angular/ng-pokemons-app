@@ -32,4 +32,9 @@ export class DetailPokemonComponent implements OnInit {
 		this.router.navigate(link);
 	}
 
+	delete(pokemon: Pokemon): void {
+		this.pokemonsService.deletePokemon(pokemon)
+			.subscribe(_ => this.goBack());
+	}
+
 }
