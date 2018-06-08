@@ -1,6 +1,5 @@
 import { Injectable } from '@angular/core';
 import { Pokemon } from './pokemon';
-import { POKEMONS } from './mock-pokemons';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Observable, of } from 'rxjs';
 import { catchError, map, tap } from 'rxjs/operators';
@@ -28,6 +27,18 @@ export class PokemonsService {
 		return this.http.get<Pokemon>(url).pipe(
 			tap(_ => this.log(`fetched pokemon id=${id}`)),
 			catchError(this.handleError<Pokemon>(`getPokemon id=${id}`))
+		);
+	}
+
+	/** PUT: update the pokemon on the server */
+	updatePokemon(pokemon: Pokemon): Observable<any> {
+		const httpOptions = {
+			headers: new HttpHeaders({ 'Content-Type': 'application/json' })
+		};
+
+		return this.http.put(this.pokemonsUrl, pokemon, httpOptions).pipe(
+			tap(_ => this.log(`updated pokemon id=${pokemon.id}`)),
+			catchError(this.handleError<any>('updatePokemon'))
 		);
 	}
 
