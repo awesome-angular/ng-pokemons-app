@@ -67,6 +67,19 @@ export class PokemonsService {
 		);
 	}
 
+	/* GET pokemons search */
+	searchPokemons(term: string): Observable<Pokemon[]> {
+		if (!term.trim()) {
+			// si le terme de recherche n'existe pas, on renvoie un tableau vide.
+			return of([]);
+		}
+
+		return this.http.get<Pokemon[]>(`api/pokemons/?name=${term}`).pipe(
+			tap(_ => this.log(`found pokemons matching "${term}"`)),
+			catchError(this.handleError<Pokemon[]>('searchPokemons', []))
+		);
+	}
+
 	// Retourne la liste des types des Pokémons
 	getPokemonTypes(): Array<string> {
 		return [
