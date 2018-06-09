@@ -1,23 +1,26 @@
 <h1 class='center'>Pokémons</h1>
   <div class='container'>
     <div class="row">
-    <div *ngFor='let pokemon of pokemons' class="col s6 m4">
-      <div class="card horizontal" (click)="selectPokemon(pokemon)" pkmnBorderCard>
-        <div class="card-image">
-          <img [src]="pokemon.picture">
-        </div>
-        <div class="card-stacked">
-          <div class="card-content">
-            <p>{{ pokemon.name }}</p>
-            <p><small>{{ pokemon.created | date:"dd/MM/yyyy" }}</small></p>
-            <span *ngFor='let type of pokemon.types' class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+
+      <pokemon-search></pokemon-search>
+      
+      <div *ngFor='let pokemon of pokemons' class="col s6 m4">
+        <div class="card horizontal" (click)="selectPokemon(pokemon)" pkmnBorderCard>
+          <div class="card-image">
+            <img [src]="pokemon.picture">
+          </div>
+          <div class="card-stacked">
+            <div class="card-content">
+              <p>{{ pokemon.name }}</p>
+              <p><small>{{ pokemon.created | date:"dd/MM/yyyy" }}</small></p>
+              <span *ngFor='let type of pokemon.types' class="{{ type | pokemonTypeColor }}">{{ type }}</span>
+            </div>
           </div>
         </div>
       </div>
     </div>
-    </div>
   </div>
-  
+
   <!-- Button to add pokemon -->
   <a class="btn-floating btn-large waves-effect waves-light red z-depth-3"
     style="position: fixed; bottom: 25px; right: 25px;"
