@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Pokemon } from './pokemon';
 import { Router } from '@angular/router';
 import { PokemonsService } from './pokemons.service';
@@ -13,13 +14,15 @@ export class ListPokemonComponent implements OnInit {
 
 	constructor(
 		private router: Router,
-		private pokemonsService: PokemonsService) { }
+		private pokemonsService: PokemonsService,
+		private titleService: Title) { }
 
 	ngOnInit(): void {
 		this.getPokemons();
 	}
 
 	getPokemons(): void {
+		this.titleService.setTitle('Liste des pokémons');
 		this.pokemonsService.getPokemons()
 			.subscribe(pokemons => this.pokemons = pokemons);
 	}

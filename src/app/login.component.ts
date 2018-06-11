@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Router } from '@angular/router';
 import { AuthService } from './auth.service';
 
@@ -36,7 +37,14 @@ export class LoginComponent {
 	private name: string;
 	private password: string;
 
-	constructor(private authService: AuthService, private router: Router) { }
+	constructor(
+		private authService: AuthService,
+		private router: Router,
+		private titleService: Title) { }
+
+	ngOnInit() {
+		this.titleService.setTitle('Connexion');
+	}
 
 	// Informe l'utilisateur sur son authentfication.
 	setMessage() {

@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { Pokemon } from './pokemon';
 
 @Component({
@@ -9,9 +10,10 @@ export class AddPokemonComponent implements OnInit {
 
 	pokemon: Pokemon = null;
 
-	constructor() { }
+	constructor(private titleService: Title) { }
 
 	ngOnInit(): void {
+		this.titleService.setTitle('Ajouter un pokémon');
 		this.pokemon = new Pokemon();
 	}
 
