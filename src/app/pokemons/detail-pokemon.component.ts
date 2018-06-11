@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { Title } from '@angular/platform-browser';
 import { ActivatedRoute, Router, Params } from '@angular/router';
 import { Pokemon } from './pokemon';
 import { PokemonsService } from './pokemons.service';
@@ -15,12 +16,16 @@ export class DetailPokemonComponent implements OnInit {
 	constructor(
 		private route: ActivatedRoute,
 		private router: Router,
-		private pokemonsService: PokemonsService) { }
+		private pokemonsService: PokemonsService,
+		private titleService: Title) { }
 
 	ngOnInit(): void {
 		let id = +this.route.snapshot.paramMap.get('id');
 		this.pokemonsService.getPokemon(id)
-			.subscribe(pokemon => this.pokemon = pokemon);
+			.subscribe(pokemon => {
+				this.pokemon = pokemon;
+				this.titleService.setTitle(`Informations sur ${pokemon.name}`);
+			});
 	}
 
 	goBack(): void {
