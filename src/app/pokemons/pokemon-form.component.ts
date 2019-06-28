@@ -28,7 +28,7 @@ export class PokemonFormComponent implements OnInit {
 	// Détermine si le type passé en paramètres appartient ou non au pokémon en cours d'édition.
 	hasType(type: string): boolean {
 		let index = this.pokemon.types.indexOf(type);
-		if (~index) return true;
+		if (index > -1) return true;
 		return false;
 	}
 
@@ -39,7 +39,7 @@ export class PokemonFormComponent implements OnInit {
 			this.pokemon.types.push(type);
 		} else {
 			let index = this.pokemon.types.indexOf(type);
-			if (~index) {
+			if (index > -1) {
 				this.pokemon.types.splice(index, 1);
 			}
 		}
